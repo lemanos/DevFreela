@@ -41,5 +41,39 @@ namespace DevFreela.Domain.Entities
         public ProjetoStatusEnum Status { get; private set; }
 
         public List<ProjetoComentario> Comentarios { get; private set; }
+
+        public void Cancelar()
+        {
+            if (Status == ProjetoStatusEnum.EmProgresso)
+            {
+                Status = ProjetoStatusEnum.Cancelado;
+            }
+        }
+
+        public void Finalizar()
+        {
+            if (Status == ProjetoStatusEnum.EmProgresso)
+            {
+                Status = ProjetoStatusEnum.Finalizado;
+                FinalizadoEm = DateTime.Now;
+            }
+        }
+
+        public void Iniciar()
+        {
+            if (Status == ProjetoStatusEnum.Criado)
+            {
+                Status = ProjetoStatusEnum.EmProgresso;
+                IniciadoEm = DateTime.Now;
+            }
+        }
+
+        public void Atualizar( string titulo, string descricao, decimal custoTotal)
+        {
+            Titulo = titulo;
+            Descricao = descricao;
+            TotalCusto = custoTotal;
+        }
+
     }
 }
